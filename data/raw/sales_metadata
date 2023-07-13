@@ -2,14 +2,14 @@
 # Note:
 #    Data target: UNIQLO Japan directly-run stores (excluding franchise stores)
 #    Same stores: Directly-run stores that have been in operation for the full business term
-#    (This data refers purely to UNIQLO stores within Japan and does not include any UNIQLO stores outside of Japan or non-UNIQLO businesses.)
+#    (This data refers purely to UNIQLO stores within Japan and does not include any UNIQLO stores outside of Japan or non-UNIQLO #    businesses.)
 
-# Data is in Y/Y (%) e.g. 96.6 is equivalent to a decrease of 3.4%
-# Customer Numbers = Number of Customers
+# Data is in Y/Y (%) e.g. 96.6 is equivalent to a decrease of 3.4% compared to the previous year
 # Average Purchase = Average Purchase per Customer
 
 # Same Stores sales data from before September 2016 may not include online sales
-# data for Own Stores without online sales is not included starting from September 2018
+# data for Own Stores without online sales is not included starting after August 2018 (2019 file and onwards)
+# data rows from the 2016 file and earlier are separated by dotted lines which makes parsing difficult
 
 # the 2015, 2017 and other sales data files have different row naming conventions 
 # Directly-run Stores = Directly run Stores = Own Stores

@@ -10,6 +10,7 @@
 # Same Stores sales data from before September 2016 may not include online sales
 # data for Own Stores without online sales is not included starting after August 2018 (2019 file and onwards)
 # data rows from the 2016 file and earlier are separated by dotted lines which makes parsing difficult
+# comment2017 missing Openings and Closures for December 2016
 
 # the 2015, 2017 and other sales data files have different row naming conventions 
 # Directly-run Stores = Directly run Stores = Own Stores

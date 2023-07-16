@@ -1,3 +1,4 @@
+# functions for processing sales data
 import camelot
 import glob
 import numpy as np
@@ -5,7 +6,7 @@ import pandas as pd
 import re
 
 def simplify_store_type(store_type):
-    simplified_store_type = re.match(pattern='(.*?Stores)', string=store_type).group(0)
+    simplified_store_type = re.match('(.*?Stores)', store_type).group(0)
     return simplified_store_type
     
 def clean_sales_data(sales_data):
@@ -63,11 +64,12 @@ def clean_and_save_sales_data():
     raw_sales_data_files.sort()
     
     # exclude 2013 to 2016 files
+    year_pattern = re.compile('(\d{4})')
     for file in raw_sales_data_files[4:]:
         raw_sales_data = camelot.read_pdf(file, split_text=True)
         cleaned_sales_data = clean_sales_data(raw_sales_data[0].df)
 
-        august_year = int(re.search(pattern='(\d{4})', string=file).group(0))
+        august_year = int(re.search(year_pattern, file).group(0))
         cleaned_sales_data.to_csv(
             f'./data/preprocessed/sales_data/monthly_sales_sept{august_year-1}_to_aug{august_year}.csv',
             header=False,
@@ -104,5 +106,4 @@ def unpivot_combine_and_save_sales_data():
         21: 'Biannual',
     })
     
-    combined_sales_data.to_csv('./data/preprocessed/combined_sales_data.csv', index=False)
-    
+    combined_sales_data.to_csv('./data/preprocessed/sales_data.csv', index=False)

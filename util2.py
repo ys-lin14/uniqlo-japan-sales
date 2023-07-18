@@ -57,11 +57,12 @@ def create_opening_closure_df(month_years, openings, closures, term):
     })
     return opening_closure_df
 
-def create_information_df(month_years, sales_information, other_information):
+def create_information_df(month_years, sales_information, other_information, term):
     information_df = pd.DataFrame({
         'Period': month_years,
         'Sales Comments': sales_information,
-        'Other Information': other_information
+        'Other Information': other_information,
+        'Term': term
     })
     return information_df
 
@@ -82,7 +83,7 @@ def replace_missing_information_with_nan(information):
     
 def clean_information_data(information_data):
     cleaned_information_data = information_data.melt(
-        id_vars='Period', 
+        id_vars=['Period', 'Term'], 
         var_name='Information Type', 
         value_name='Information'
     )
@@ -130,7 +131,7 @@ def clean_and_save_comments_and_opening_closure_data():
             other_information = get_information(text_chunks, other_information_pattern)
 
             opening_closure_df = create_opening_closure_df(month_years, openings, closures, term)
-            information_df = create_information_df(month_years, sales_information, other_information)
+            information_df = create_information_df(month_years, sales_information, other_information, term)
 
             opening_closure_dfs.append(opening_closure_df)
             information_dfs.append(information_df)
@@ -156,10 +157,11 @@ def combine_and_save_sales_comments():
     preprocessed_sales_comment_files = glob.glob('./data/preprocessed/sales_comments/*')
     preprocessed_sales_comment_files.sort()
     
-    sales_comment_dfs = [pd.read_csv(file) for file in preprocessed_sales_comment_files]
+    sales_comment_dfs = [pd.read_csv(file, encoding='utf-8') for file in preprocessed_sales_comment_files]
     combined_sales_comments = pd.concat(sales_comment_dfs, ignore_index=True)
+    combined_sales_comments['Information'] = combined_sales_comments['Information'].replace('・', '', regex=True)
     
-    combined_sales_comments.to_csv('./data/preprocessed/monthly_sales_comments.csv', index=False)
+    combined_sales_comments.to_excel('./data/preprocessed/monthly_sales_comments.xlsx', index=False)
     
 def combine_and_save_store_openings_and_closures():
     preprocessed_opening_closure_files = glob.glob('./data/preprocessed/store_openings_and_closures/*')

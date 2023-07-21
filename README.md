@@ -11,4 +11,4 @@ Links:
 <br>
   
 References\
-*Monthly Retail Data* [Data]. (2016). Japan: Fast Retailing Co., LTD.
+*Monthly Retail Data* [Data]. (2023). Japan: Fast Retailing Co., LTD.
